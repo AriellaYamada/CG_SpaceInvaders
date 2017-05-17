@@ -5,9 +5,9 @@
 #define MAX_ALIENS_V 5
 
 //Variaveis de movimento
-int nTiros = 0;
-GLfloat tiroNavex = 0.0f;
-GLfloat tiroNavey = 0.0f;
+int nTiros = 0, countTiros = 0;
+GLfloat tiroNavex[] = {0.0f, 0.0f, 0.0f};
+GLfloat tiroNavey[] = {0.0f, 0.0f, 0.0f};
 GLfloat posNave = 0.0f;
 
 // Matriz aliens
@@ -63,20 +63,15 @@ void init() {
 	}
 }
 
-void desenhaCirculo(GLfloat xcentro, GLfloat ycentro) {
-
-
-}
-
 void desenhaAlien1() {
 
 	// Especifica a cor verde
 	glColor3f(0.0f, 1.0f, 0.0f);
 
 	glBegin(GL_TRIANGLES);
-	glVertex2f(0.5f, 0.5f);
-	glVertex2f(-0.5f, 0.5f);
-	glVertex2f(0.0f, -0.5f);
+		glVertex2f(0.5f, 0.5f);
+		glVertex2f(-0.5f, 0.5f);
+		glVertex2f(0.0f, -0.5f);
 	glEnd();
 
 }
@@ -105,9 +100,9 @@ void desenhaAlien3() {
 
 	for (theta = 0.0f; theta <= total; theta = theta + var) {
 		glBegin(GL_TRIANGLES);
-		glVertex2f(a, b);
-		glVertex2f(a+raio*cos(theta), b+raio*sin(theta));
-		glVertex2f(a+raio*cos(theta+var), b+raio*sin(theta+var));
+			glVertex2f(a, b);
+			glVertex2f(a+raio*cos(theta), b+raio*sin(theta));
+			glVertex2f(a+raio*cos(theta+var), b+raio*sin(theta+var));
 		glEnd();
 	}
 
@@ -118,13 +113,33 @@ void desenhaNave(){
 	glColor3f(1.0f, 0.0f, 0.0f);
 
 	glBegin(GL_QUADS);
-	glVertex2f(-0.5f,-0.5f);
-	glVertex2f(0.5f, -0.5f);
-	glVertex2f(0.5f,0.5f);
-	glVertex2f(-0.5f,0.5f);
+		glVertex2f(-0.5f,-0.5f);
+		glVertex2f(0.5f, -0.5f);
+		glVertex2f(0.5f,0.5f);
+		glVertex2f(-0.5f,0.5f);
 	glEnd();
 }
 
+void desenhaTiro() {
+
+	glColor3f(1.0f, 0.0f, 0.0f);
+
+	glBegin(GL_LINES);
+		glVertex2f(0.0f, -0.2f);
+		glVertex2f(0.0f, 0.2f);
+	glEnd();
+}
+
+void moveTiro(int passo) {
+	int i;
+	for(i = 0; i < nTiros; i++) {
+		tiroNavey[i] += (1.0*passo)/100;
+	}
+	glutPostRedisplay();
+	if(passo == countTiros)
+		glutTimerFunc(10, moveTiro, passo);
+
+}
 void Desenha() {
 
 	// Muda para o sistema de coordenadas do modelo
@@ -181,6 +196,12 @@ void Desenha() {
 		desenhaAlien3();
 	}*/
 
+	for(i = 0; i < nTiros; i++) {
+		glLoadIdentity();
+		glTranslatef(tiroNavex[i], tiroNavey[i], 0.0f);
+		glScalef(0.1f, 0.1f, 0.0f);
+		desenhaTiro();
+	}
 
 	glFlush();
 
@@ -197,8 +218,18 @@ void MovimentosNave(int key, int x, int y) {
 		if(posNave>1.5f)
 		posNave = 1.5f;
 	}
+	if(key == GLUT_KEY_UP) {
+		if(nTiros < 3){
+			nTiros++;
+			tiroNavex[nTiros - 1] = posNave;
+			tiroNavey[nTiros - 1] = -0.8f;
+			glutTimerFunc(10, moveTiro, ++countTiros);
+		}
+	}
+
 	glutPostRedisplay();
 }
+
 
 int main(int argc, char *argv[]) {
 
