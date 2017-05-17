@@ -2,6 +2,7 @@
 #include <cmath>
 
 //Variaveis de movimento
+int nTiros = 0;
 GLfloat tiroNavex = 0.0f;
 GLfloat tiroNavey = 0.0f;
 GLfloat posNave = 0.0f;
@@ -171,7 +172,7 @@ void MovimentosNave(int key, int x, int y) {
 int main(int argc, char *argv[]) {
 
 	glutInit(&argc, argv);
-	glutInitWindowSize(800,800);
+	glutInitWindowSize(600,600);
 	glutInitWindowPosition(250,75);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutCreateWindow("Aliens");
