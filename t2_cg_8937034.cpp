@@ -47,18 +47,7 @@ void init() {
 }
 
 void desenhaCirculo(GLfloat xcentro, GLfloat ycentro) {
-	GLfloat total = 2.0f*3.1415f, N = 100.0f, theta = 0.0f, var = total/N;
-	GLfloat raio = 15.0f;
-	GLfloat a = xcentro;
-	GLfloat b = ycentro;
 
-	for (theta = 0.0f; theta <= total; theta = theta + var) {
-		glBegin(GL_TRIANGLES);
-		glVertex2f(a, b);
-		glVertex2f(a+raio*cos(theta), b+raio*sin(theta));
-		glVertex2f(a+raio*cos(theta+var), b+raio*sin(theta+var));
-		glEnd();
-	}
 
 }
 
@@ -80,31 +69,31 @@ void desenhaAlien2() {
 	glColor3f(1.0f, 1.0f, 0.0f);
 
 	glBegin(GL_QUADS);
-		glVertex2f(a2, ya2fix);
-		glVertex2f(b2, ya2fix);
-		glVertex2f(a2, yb2fix);
-		glVertex2f(b2, yb2fix);
+		glVertex2f(-0.5f, -0.5f);
+		glVertex2f(0.5f, -0.5);
+		glVertex2f(0.5f, 0.5f);
+		glVertex2f(-0.5f, 0.5f);
 	glEnd();
+
 }
 
 void desenhaAlien3() {
 
 	glColor3f(0.0f, 0.0f, 1.0f);
 
-	GLfloat centro;
-	GLfloat yfix = 470.0f;
+	GLfloat total = 2.0f*3.1415f, N = 100.0f, theta = 0.0f, var = total/N;
+	GLfloat raio = 0.5f;
+	GLfloat a = 0.0f;
+	GLfloat b = 0.0f;
 
-	for(centro = 45.0f; centro < 800.0; centro = centro + 45.0f) {
-		desenhaCirculo(centro, yfix);
+	for (theta = 0.0f; theta <= total; theta = theta + var) {
+		glBegin(GL_TRIANGLES);
+		glVertex2f(a, b);
+		glVertex2f(a+raio*cos(theta), b+raio*sin(theta));
+		glVertex2f(a+raio*cos(theta+var), b+raio*sin(theta+var));
+		glEnd();
 	}
 
-}
-
-void desenhaAliens(){
-	desenhaAlien1();
-	desenhaAlien2();
-	desenhaAlien3();
-	glFlush();
 }
 
 void desenhaNave(){
@@ -143,6 +132,22 @@ void Desenha() {
 	}
 
 	//Aliens 2
+	for(i = 1; i < 8; i++) {
+		GLfloat a = 0.8 - 0.2*i;
+		glLoadIdentity();
+		glTranslatef(a,0.7f,0.0f);
+		glScalef(0.1f,0.1f,0.0f);
+		desenhaAlien2();
+	}
+
+	//Aliens 3
+	for(i = 1; i < 8; i++) {
+		GLfloat a = 0.8 - 0.2*i;
+		glLoadIdentity();
+		glTranslatef(a,0.5f,0.0f);
+		glScalef(0.1f,0.1f,0.0f);
+		desenhaAlien3();
+	}
 
 
 	glFlush();
@@ -166,7 +171,7 @@ void MovimentosNave(int key, int x, int y) {
 int main(int argc, char *argv[]) {
 
 	glutInit(&argc, argv);
-	glutInitWindowSize(800,600);
+	glutInitWindowSize(800,800);
 	glutInitWindowPosition(250,75);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutCreateWindow("Aliens");
