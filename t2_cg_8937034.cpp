@@ -1,11 +1,17 @@
 #include <GL/glut.h>
 #include <cmath>
 
+#define MAX_ALIENS_H 5
+#define MAX_ALIENS_V 5
+
 //Variaveis de movimento
 int nTiros = 0, countTiros = 0;
 GLfloat tiroNavex[] = {0.0f, 0.0f, 0.0f};
 GLfloat tiroNavey[] = {0.0f, 0.0f, 0.0f};
 GLfloat posNave = 0.0f;
+
+// Matriz aliens
+GLfloat aliens[5][5][2];
 
 // Funcao callback chamada quando o tamanho da janela alterado
 void AlteraTamanhoJanela(GLsizei w, GLsizei h)
@@ -45,6 +51,16 @@ void init() {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	gluOrtho2D(-1.0f,1.0f,-1.0f,1.0f);
 	glViewport(0,0,800,600);
+
+	// inicializa matriz de aliens
+	for (GLint i = 0; i < MAX_ALIENS_V; i++) {
+		for(GLint j = 0; j < MAX_ALIENS_H; j++) {
+			// valor x
+			aliens[i][j][0] = 0.4f - (0.2f * i);
+			// valor y
+			aliens[i][j][1] = 0.9f - (j * 0.2f);
+		}
+	}
 }
 
 void desenhaAlien1() {
@@ -137,8 +153,23 @@ void Desenha() {
 	glScalef(0.15f, 0.15f, 0.0f);
 	desenhaNave();
 
+	// Desenha aliens
+	for (GLint i = 0; i < MAX_ALIENS_V; i++) {
+		for (GLint j = 0; j < MAX_ALIENS_H; j++) {
+			glLoadIdentity();
+			glTranslatef(aliens[i][j][0], aliens[i][j][1], 0.0f);
+			glScalef(0.1f, 0.1f, 0.0f);
+			if (j < 2)
+				desenhaAlien1();
+			else if (j < 4)
+				desenhaAlien2();
+			else
+				desenhaAlien3();
+		}
+	}
+
 	//Aliens 1
-	int i;
+	/*int i;
 	for(i = 1; i < 8; i++) {
 		GLfloat a = 0.8 - 0.2*i;
 		glLoadIdentity();
@@ -163,7 +194,7 @@ void Desenha() {
 		glTranslatef(a,0.5f,0.0f);
 		glScalef(0.1f,0.1f,0.0f);
 		desenhaAlien3();
-	}
+	}*/
 
 	for(i = 0; i < nTiros; i++) {
 		glLoadIdentity();
