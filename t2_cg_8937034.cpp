@@ -68,9 +68,9 @@ void desenhaAlien1() {
 	glColor3f(0.0f, 1.0f, 0.0f);
 
 	glBegin(GL_TRIANGLES);
-		glVertex2f(0.5f, 0.5f);
-		glVertex2f(-0.5f, 0.5f);
-		glVertex2f(0.0f, -0.5f);
+	glVertex2f(0.5f, 0.5f);
+	glVertex2f(-0.5f, 0.5f);
+	glVertex2f(0.0f, -0.5f);
 	glEnd();
 
 }
@@ -79,19 +79,12 @@ void desenhaAlien2() {
 
 	glColor3f(1.0f, 1.0f, 0.0f);
 
-	GLfloat ya2fix = 530.0f;
-	GLfloat yb2fix = 500.0f;
-	GLfloat a2, b2;
-
-	for(b2 = 115.0f; b2 < 800.0f; b2 = b2+75.0f) {
-		a2 = b2 - 40;
-		glBegin(GL_QUADS);
+	glBegin(GL_QUADS);
 		glVertex2f(a2, ya2fix);
 		glVertex2f(b2, ya2fix);
 		glVertex2f(a2, yb2fix);
 		glVertex2f(b2, yb2fix);
-		glEnd();
-	}
+	glEnd();
 }
 
 void desenhaAlien3() {
@@ -119,10 +112,10 @@ void desenhaNave(){
 	glColor3f(1.0f, 0.0f, 0.0f);
 
 	glBegin(GL_QUADS);
-		glVertex2f(-0.5f,-0.5f);
-		glVertex2f(0.5f, -0.5f);
-		glVertex2f(0.5f,0.5f);
-		glVertex2f(-0.5f,0.5f);
+	glVertex2f(-0.5f,-0.5f);
+	glVertex2f(0.5f, -0.5f);
+	glVertex2f(0.5f,0.5f);
+	glVertex2f(-0.5f,0.5f);
 	glEnd();
 }
 
@@ -134,18 +127,24 @@ void Desenha() {
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT);
 	//desenhaAliens();
-	glPushMatrix();
 	glTranslatef(posNave,0.0f,0.0f);
 	glTranslatef(0.0f, -0.8f, 0.0f);
 	glScalef(0.15f, 0.15f, 0.0f);
 	desenhaNave();
-	glPopMatrix();
 
-	GLfloat i;
-	glTranslatef(0.0f, 0.9f, 0.0f);
-	glScalef(0.1f,0.1f,0.0f);
-	glTranslatef(-0.9f,0.0f,0.0f);
-	desenhaAlien1();
+	//Aliens 1
+	int i;
+	for(i = 1; i < 8; i++) {
+		GLfloat a = 0.8 - 0.2*i;
+		glLoadIdentity();
+		glTranslatef(a,0.9f,0.0f);
+		glScalef(0.1f,0.1f,0.0f);
+		desenhaAlien1();
+	}
+
+	//Aliens 2
+
+
 	glFlush();
 
 }
