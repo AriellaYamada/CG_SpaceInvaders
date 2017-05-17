@@ -168,34 +168,7 @@ void Desenha() {
 		}
 	}
 
-	//Aliens 1
-	/*int i;
-	for(i = 1; i < 8; i++) {
-		GLfloat a = 0.8 - 0.2*i;
-		glLoadIdentity();
-		glTranslatef(a,0.9f,0.0f);
-		glScalef(0.1f,0.1f,0.0f);
-		desenhaAlien1();
-	}
-
-	//Aliens 2
-	for(i = 1; i < 8; i++) {
-		GLfloat a = 0.8 - 0.2*i;
-		glLoadIdentity();
-		glTranslatef(a,0.7f,0.0f);
-		glScalef(0.1f,0.1f,0.0f);
-		desenhaAlien2();
-	}
-
-	//Aliens 3
-	for(i = 1; i < 8; i++) {
-		GLfloat a = 0.8 - 0.2*i;
-		glLoadIdentity();
-		glTranslatef(a,0.5f,0.0f);
-		glScalef(0.1f,0.1f,0.0f);
-		desenhaAlien3();
-	}*/
-
+	int i;
 	for(i = 0; i < nTiros; i++) {
 		glLoadIdentity();
 		glTranslatef(tiroNavex[i], tiroNavey[i], 0.0f);
