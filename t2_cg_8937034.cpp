@@ -42,7 +42,8 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h)
 void init() {
 	//Define a cor preta para o fundo
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	gluOrtho2D(-1.0f,1.0f,-1.0f,1.0f);
+	glViewport(0,0,800,600);
 }
 
 void desenhaCirculo(GLfloat xcentro, GLfloat ycentro) {
@@ -126,13 +127,43 @@ void desenhaNave(){
 	glColor3f(1.0f, 0.0f, 0.0f);
 
 	glBegin(GL_QUADS);
-		glVertex2f(375.0f,50.0f);
-		glVertex2f(425.0f,50.0f);
-		glVertex2f(425.0f,100.0f);
-		glVertex2f(375.0f,100.0f);
+		glVertex2f(-0.5f,-0.5f);
+		glVertex2f(0.5f, -0.5f);
+		glVertex2f(0.5f,0.5f);
+		glVertex2f(-0.5f,0.5f);
 	glEnd();
 }
 
+void Desenha() {
+
+	// Muda para o sistema de coordenadas do modelo
+	glMatrixMode(GL_MODELVIEW);
+	// Inicializa a matriz de transforma��o corrente
+	glLoadIdentity();
+	glClear(GL_COLOR_BUFFER_BIT);
+	//desenhaAliens();
+	glTranslatef(posNave,0.0f,0.0f);
+	glTranslatef(0.0f, -0.8f, 0.0f);
+	glScalef(0.15f, 0.15f, 0.0f);
+
+	desenhaNave();
+	glFlush();
+
+}
+
+void MovimentosNave(int key, int x, int y) {
+	if(key == GLUT_KEY_LEFT) {
+		posNave-=0.05f;
+		if(posNave<-1.5f)
+			posNave = -1.5f;
+	}
+	if(key == GLUT_KEY_RIGHT) {
+		posNave+=0.05f;
+		if(posNave>1.5f)
+			posNave = 1.5f;
+	}
+	glutPostRedisplay();
+}
 
 int main(int argc, char *argv[]) {
 
@@ -142,13 +173,12 @@ int main(int argc, char *argv[]) {
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutCreateWindow("Aliens");
 
+	glutDisplayFunc(Desenha);
+	glutSpecialFunc(MovimentosNave);
+
 	init();
-
-	glutDisplayFunc(desenhaAliens);
-
-	glMatrixMode(GL_PROJECTION);
-	gluOrtho2D(0, 800, 0, 600);
 
 	glutMainLoop();
 
+	return 0;
 }
