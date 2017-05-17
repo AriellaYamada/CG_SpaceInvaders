@@ -196,7 +196,7 @@ void Desenha() {
 		desenhaAlien3();
 	}*/
 
-	for(i = 0; i < nTiros; i++) {
+	for(GLint i = 0; i < nTiros; i++) {
 		glLoadIdentity();
 		glTranslatef(tiroNavex[i], tiroNavey[i], 0.0f);
 		glScalef(0.1f, 0.1f, 0.0f);
