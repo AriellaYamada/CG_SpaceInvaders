@@ -35,13 +35,13 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h)
 	else
 	{
 		gluOrtho2D (-1.0f*largura/altura, 1.0f*largura/altura, -1.0f, 1.0f);
-	//	win = 1.0f*largura/altura;
+		//	win = 1.0f*largura/altura;
 	}
 }
 
 void init() {
 	//Define a cor preta para o fundo
-  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	gluOrtho2D(-1.0f,1.0f,-1.0f,1.0f);
 	glViewport(0,0,800,600);
 }
@@ -54,9 +54,9 @@ void desenhaCirculo(GLfloat xcentro, GLfloat ycentro) {
 
 	for (theta = 0.0f; theta <= total; theta = theta + var) {
 		glBegin(GL_TRIANGLES);
-			glVertex2f(a, b);
-			glVertex2f(a+raio*cos(theta), b+raio*sin(theta));
-			glVertex2f(a+raio*cos(theta+var), b+raio*sin(theta+var));
+		glVertex2f(a, b);
+		glVertex2f(a+raio*cos(theta), b+raio*sin(theta));
+		glVertex2f(a+raio*cos(theta+var), b+raio*sin(theta+var));
 		glEnd();
 	}
 
@@ -67,19 +67,11 @@ void desenhaAlien1() {
 	// Especifica a cor verde
 	glColor3f(0.0f, 1.0f, 0.0f);
 
-	GLfloat ya1fix = 585.0f;
-	GLfloat yb1fix = 545.0f;
-	GLfloat a1, b1, c1;
-
-	for (b1 = 85.0f; b1 < 800.0f; b1=b1+75.0f) {
-		a1 = b1 - 60.0f;
-		c1 = b1 - 30.0f;
-		glBegin(GL_TRIANGLES);
-			glVertex2f(a1, ya1fix);
-			glVertex2f(b1, ya1fix);
-			glVertex2f(c1, yb1fix);
-		glEnd();
-	}
+	glBegin(GL_TRIANGLES);
+		glVertex2f(0.5f, 0.5f);
+		glVertex2f(-0.5f, 0.5f);
+		glVertex2f(0.0f, -0.5f);
+	glEnd();
 
 }
 
@@ -94,10 +86,10 @@ void desenhaAlien2() {
 	for(b2 = 115.0f; b2 < 800.0f; b2 = b2+75.0f) {
 		a2 = b2 - 40;
 		glBegin(GL_QUADS);
-			glVertex2f(a2, ya2fix);
-			glVertex2f(b2, ya2fix);
-			glVertex2f(a2, yb2fix);
-			glVertex2f(b2, yb2fix);
+		glVertex2f(a2, ya2fix);
+		glVertex2f(b2, ya2fix);
+		glVertex2f(a2, yb2fix);
+		glVertex2f(b2, yb2fix);
 		glEnd();
 	}
 }
@@ -142,11 +134,18 @@ void Desenha() {
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT);
 	//desenhaAliens();
+	glPushMatrix();
 	glTranslatef(posNave,0.0f,0.0f);
 	glTranslatef(0.0f, -0.8f, 0.0f);
 	glScalef(0.15f, 0.15f, 0.0f);
-
 	desenhaNave();
+	glPopMatrix();
+
+	GLfloat i;
+	glTranslatef(0.0f, 0.9f, 0.0f);
+	glScalef(0.1f,0.1f,0.0f);
+	glTranslatef(-0.9f,0.0f,0.0f);
+	desenhaAlien1();
 	glFlush();
 
 }
@@ -155,12 +154,12 @@ void MovimentosNave(int key, int x, int y) {
 	if(key == GLUT_KEY_LEFT) {
 		posNave-=0.05f;
 		if(posNave<-1.5f)
-			posNave = -1.5f;
+		posNave = -1.5f;
 	}
 	if(key == GLUT_KEY_RIGHT) {
 		posNave+=0.05f;
 		if(posNave>1.5f)
-			posNave = 1.5f;
+		posNave = 1.5f;
 	}
 	glutPostRedisplay();
 }
