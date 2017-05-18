@@ -4,14 +4,18 @@
 #define MAX_ALIENS_H 5
 #define MAX_ALIENS_V 5
 
+#define MAX_TIROS 3
+
 //Variaveis de movimento
 int nTiros = 0, countTiros = 0;
 GLfloat tiroNavex[] = {0.0f, 0.0f, 0.0f};
 GLfloat tiroNavey[] = {0.0f, 0.0f, 0.0f};
 GLfloat posNave = 0.0f;
+bool tirosAtivos[3] = {false, false, false};
 
 // Matriz aliens
 GLfloat aliens[5][5][2];
+bool alienVivo[5][5];
 
 // Funcao callback chamada quando o tamanho da janela alterado
 void AlteraTamanhoJanela(GLsizei w, GLsizei h)
@@ -59,6 +63,35 @@ void init() {
 			aliens[i][j][0] = 0.4f - (0.2f * i);
 			// valor y
 			aliens[i][j][1] = 0.9f - (j * 0.2f);
+		}
+	}
+
+	for (int i = 0; i < MAX_ALIENS_H; i++) {
+		for (int j = 0; j < MAX_ALIENS_V; j++) {
+			alienVivo[i][j] = true;
+		}
+	}
+}
+
+void verificaAcerto(){
+	int i, j, k;
+	for (i = 0; i < MAX_ALIENS_H; i++)
+		for (j = 0; j < MAX_ALIENS_V; j++)
+			for(k = 0; k < MAX_TIROS; k++)
+				if(tirosAtivos[k] && tiroNavey[k] <= aliens[i][j][1] + 0.05f && tiroNavey[k] >= aliens[i][j][1] - 0.05f) {
+					alienVivo[i][j] = false;
+					tirosAtivos[k] = false;
+					nTiros--;
+				}
+}
+
+void verificaFimTiro() {
+	if(nTiros > 0) {
+		for(int i = 0; i < MAX_TIROS; i++) {
+			if(tirosAtivos[i] && tiroNavey[i] > 1.0f) {
+				tirosAtivos[i] = false;
+				nTiros--;
+			}
 		}
 	}
 }
@@ -135,11 +168,12 @@ void moveTiro(int passo) {
 	for(i = 0; i < nTiros; i++) {
 		tiroNavey[i] += (1.0*passo)/100;
 	}
+	verificaAcerto();
 	glutPostRedisplay();
 	if(passo == countTiros)
 		glutTimerFunc(10, moveTiro, passo);
-
 }
+
 void Desenha() {
 
 	// Muda para o sistema de coordenadas do modelo
@@ -156,51 +190,27 @@ void Desenha() {
 	// Desenha aliens
 	for (GLint i = 0; i < MAX_ALIENS_V; i++) {
 		for (GLint j = 0; j < MAX_ALIENS_H; j++) {
-			glLoadIdentity();
-			glTranslatef(aliens[i][j][0], aliens[i][j][1], 0.0f);
-			glScalef(0.1f, 0.1f, 0.0f);
-			if (j < 2)
-				desenhaAlien1();
-			else if (j < 4)
-				desenhaAlien2();
-			else
-				desenhaAlien3();
+			if (alienVivo[i][j]) {
+				glLoadIdentity();
+				glTranslatef(aliens[i][j][0], aliens[i][j][1], 0.0f);
+				glScalef(0.1f, 0.1f, 0.0f);
+				if (j < 2)
+					desenhaAlien1();
+				else if (j < 4)
+					desenhaAlien2();
+				else
+					desenhaAlien3();
+			}
 		}
 	}
 
-	//Aliens 1
-	/*int i;
-	for(i = 1; i < 8; i++) {
-		GLfloat a = 0.8 - 0.2*i;
-		glLoadIdentity();
-		glTranslatef(a,0.9f,0.0f);
-		glScalef(0.1f,0.1f,0.0f);
-		desenhaAlien1();
-	}
-
-	//Aliens 2
-	for(i = 1; i < 8; i++) {
-		GLfloat a = 0.8 - 0.2*i;
-		glLoadIdentity();
-		glTranslatef(a,0.7f,0.0f);
-		glScalef(0.1f,0.1f,0.0f);
-		desenhaAlien2();
-	}
-
-	//Aliens 3
-	for(i = 1; i < 8; i++) {
-		GLfloat a = 0.8 - 0.2*i;
-		glLoadIdentity();
-		glTranslatef(a,0.5f,0.0f);
-		glScalef(0.1f,0.1f,0.0f);
-		desenhaAlien3();
-	}*/
-
-	for(GLint i = 0; i < nTiros; i++) {
-		glLoadIdentity();
-		glTranslatef(tiroNavex[i], tiroNavey[i], 0.0f);
-		glScalef(0.1f, 0.1f, 0.0f);
-		desenhaTiro();
+	for(int i = 0; i < MAX_TIROS; i++) {
+		if(tirosAtivos[i]) {
+			glLoadIdentity();
+			glTranslatef(tiroNavex[i], tiroNavey[i], 0.0f);
+			glScalef(0.1f, 0.1f, 0.0f);
+			desenhaTiro();
+		}
 	}
 
 	glFlush();
@@ -219,8 +229,9 @@ void MovimentosNave(int key, int x, int y) {
 		posNave = 1.5f;
 	}
 	if(key == GLUT_KEY_UP) {
-		if(nTiros < 3){
+		if(nTiros < MAX_TIROS){
 			nTiros++;
+			tirosAtivos[nTiros - 1] = true;
 			tiroNavex[nTiros - 1] = posNave;
 			tiroNavey[nTiros - 1] = -0.8f;
 			glutTimerFunc(10, moveTiro, ++countTiros);
