@@ -6,6 +6,9 @@
 
 #define MAX_TIROS 3
 
+//Variavel que define as vidas do jogador
+int nVidas = 3;
+
 //Variaveis de movimento
 int nTiros = 0, countTiros = 0;
 GLfloat tiroNavex[] = {0.0f, 0.0f, 0.0f};
@@ -79,9 +82,11 @@ void verificaAcerto(){
 		for (j = 0; j < MAX_ALIENS_V; j++)
 			for(k = 0; k < MAX_TIROS; k++)
 				if(tirosAtivos[k] && tiroNavey[k] <= aliens[i][j][1] + 0.05f && tiroNavey[k] >= aliens[i][j][1] - 0.05f) {
-					alienVivo[i][j] = false;
-					tirosAtivos[k] = false;
-					nTiros--;
+					if(tiroNavex[k] <= aliens[i][j][0] + 0.05f && tiroNavex[k] >= aliens[i][j][0] - 0.05f) {
+						alienVivo[i][j] = false;
+						tirosAtivos[k] = false;
+						nTiros--;
+					}
 				}
 }
 
@@ -138,7 +143,6 @@ void desenhaAlien3() {
 			glVertex2f(a+raio*cos(theta+var), b+raio*sin(theta+var));
 		glEnd();
 	}
-
 }
 
 void desenhaNave(){
