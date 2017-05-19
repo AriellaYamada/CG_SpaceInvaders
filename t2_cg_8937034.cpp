@@ -71,6 +71,7 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h)
 	}
 }
 
+//Inicializa a tela e as variaveis
 void init() {
 	//Define a cor preta para o fundo
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -94,6 +95,7 @@ void init() {
 	}
 }
 
+//Verifica se os tiros acertaram alguma coisa
 void verificaAcerto(){
 	if (nVidas > 0) {
 		for (int i = 0; i < MAX_ALIENS_H; i++)
@@ -118,6 +120,7 @@ void verificaAcerto(){
 	}
 }
 
+//Verifica se o tiro chegou ao final da tela
 void verificaFimTiro() {
 	if(nTiros > 0) {
 		for(int i = 0; i < MAX_TIROS; i++) {
@@ -137,6 +140,7 @@ void verificaFimTiro() {
 	}
 }
 
+//Funcao que desenha o alien do tipo 1
 void desenhaAlien1() {
 
 	// Especifica a cor verde
@@ -150,6 +154,7 @@ void desenhaAlien1() {
 
 }
 
+//Funcao que desenha o alien do tipo 2
 void desenhaAlien2() {
 
 	glColor3f(1.0f, 1.0f, 0.0f);
@@ -163,6 +168,7 @@ void desenhaAlien2() {
 
 }
 
+//Funcao que desenha o alien do tipo 3
 void desenhaAlien3() {
 
 	glColor3f(0.0f, 0.0f, 1.0f);
@@ -181,6 +187,7 @@ void desenhaAlien3() {
 	}
 }
 
+//Funcao que desenha a nave
 void desenhaNave(){
 
 	glColor3f(1.0f, 0.0f, 0.0f);
@@ -193,6 +200,7 @@ void desenhaNave(){
 	glEnd();
 }
 
+//Funcao que desenha o tiro
 void desenhaTiro() {
 
 	glColor3f(1.0f, 0.0f, 0.0f);
@@ -203,6 +211,7 @@ void desenhaTiro() {
 	glEnd();
 }
 
+//Função que realiza o movimento dos tiros
 void moveTiro(int passo) {
 	int i;
 	for(i = 0; i < MAX_TIROS; i++) {
@@ -220,6 +229,7 @@ void moveTiro(int passo) {
 		glutTimerFunc(10, moveTiro, passo);
 }
 
+//Inicializa um tiro vindo de um alien
 void tiroAlien() {
 	int alien = rand() % 25;
 	int x = ceil(alien/25)-1;
