@@ -273,7 +273,11 @@ void Desenha() {
 			desenhaTiro();
 		}
 	}
-
+	int tiro = rand();
+	if((tiro % 233) == 0) {
+		int tempoTiroAlien = rand() % 100;
+		tiroAlien();
+	}
 
 	glFlush();
 
@@ -297,8 +301,6 @@ void MovimentosNave(int key, int x, int y) {
 			tiroNavex[nTiros - 1] = posNave;
 			tiroNavey[nTiros - 1] = -0.8f;
 			glutTimerFunc(10, moveTiro, ++countTiros);
-			int tempoTiroAlien = rand() % 100;
-			tiroAlien();
 		}
 	}
 
