@@ -140,6 +140,13 @@ void verificaFimTiro() {
 	}
 }
 
+//Verifica se os aliens alcancaram a nave
+bool verificaFimAliens() {
+	for (int i = 0; i < MAX_ALIENS_V; i++)
+		for (int j = 0; j < MAX_ALIENS_H; i++) 
+			return (alienVivo[i][j] && aliens[i][j][1] <= 0.85f)
+}
+
 //Funcao que desenha o alien do tipo 1
 void desenhaAlien1() {
 
@@ -234,9 +241,11 @@ void tiroAlien() {
 	int alien = rand() % 25;
 	int x = ceil(alien/25)-1;
 	int y = alien%25;
-	tiroAliensx[nTirosAliens] = aliens[x][y][0];
-	tiroAliensy[nTirosAliens] = aliens[x][y][1];
-	tirosAtivosAliens[nTirosAliens] = true;
+	if (alienVivo[x][y]) {
+		tiroAliensx[nTirosAliens] = aliens[x][y][0];
+		tiroAliensy[nTirosAliens] = aliens[x][y][1];
+		tirosAtivosAliens[nTirosAliens] = true;
+	}
 }
 
 void Desenha() {
