@@ -10,6 +10,11 @@
 #define MAX_TIROS 3
 #define MAX_TIROS_ALIENS 5
 
+#define MAX_POS_ALIENS 200
+#define MIN_POS_ALIENS -200
+#define DIR 0
+#define ESQ 1
+
 //Variavel que define as vidas do jogador
 int nVidas = 3;
 
@@ -24,6 +29,8 @@ bool tirosAtivos[] = {false, false, false};
 GLfloat aliens[5][5][2];
 bool alienVivo[5][5];
 int nAliens = 25;
+int dirAliens = DIR;
+int posXAliens = 0;
 
 //Tiro dos aliens
 int countTiroAlien = 0, nTirosAliens = 0;
@@ -238,21 +245,79 @@ void Desenha() {
 	}
 
 	// Desenha aliens
-	for (GLint i = 0; i < MAX_ALIENS_V; i++) {
-		for (GLint j = 0; j < MAX_ALIENS_H; j++) {
-			if (alienVivo[i][j]) {
-				glLoadIdentity();
-				glTranslatef(aliens[i][j][0], aliens[i][j][1], 0.0f);
-				glScalef(0.1f, 0.1f, 0.0f);
-				if (j < 2)
-					desenhaAlien1();
-				else if (j < 4)
-					desenhaAlien2();
-				else
-					desenhaAlien3();
+	GLfloat x = 0.0f;
+	if (dirAliens == DIR && posXAliens < MAX_POS_ALIENS) {
+		posXAliens++;
+		for (GLint i = 0; i < MAX_ALIENS_V; i++) {
+			for (GLint j = 0; j < MAX_ALIENS_H; j++) {
+				if (alienVivo[i][j]) {
+					glLoadIdentity();
+					glTranslatef(aliens[i][j][0] + 0.001*posXAliens, aliens[i][j][1], 0.0f);
+					glScalef(0.1f, 0.1f, 0.0f);
+					if (j < 2)
+						desenhaAlien1();
+					else if (j < 4)
+						desenhaAlien2();
+					else
+						desenhaAlien3();
+				}
+			}
+		}
+	} else if (dirAliens == DIR && posXAliens == MAX_POS_ALIENS) {
+		posXAliens--;
+		dirAliens = ESQ;
+		for (GLint i = 0; i < MAX_ALIENS_V; i++) {
+			for (GLint j = 0; j < MAX_ALIENS_H; j++) {
+				if (alienVivo[i][j]) {
+					glLoadIdentity();
+					glTranslatef(aliens[i][j][0] + 0.001*posXAliens, aliens[i][j][1], 0.0f);
+					glScalef(0.1f, 0.1f, 0.0f);
+					if (j < 2)
+						desenhaAlien1();
+					else if (j < 4)
+						desenhaAlien2();
+					else
+						desenhaAlien3();
+				}
+			}
+		}
+	} else if (dirAliens == ESQ && posXAliens > MIN_POS_ALIENS) {
+		posXAliens--;
+		for (GLint i = 0; i < MAX_ALIENS_V; i++) {
+			for (GLint j = 0; j < MAX_ALIENS_H; j++) {
+				if (alienVivo[i][j]) {
+					glLoadIdentity();
+					glTranslatef(aliens[i][j][0] + 0.001*posXAliens, aliens[i][j][1], 0.0f);
+					glScalef(0.1f, 0.1f, 0.0f);
+					if (j < 2)
+						desenhaAlien1();
+					else if (j < 4)
+						desenhaAlien2();
+					else
+						desenhaAlien3();
+				}
+			}
+		}
+	} else if (dirAliens == ESQ && posXAliens == MIN_POS_ALIENS){
+		posXAliens++;
+		dirAliens = DIR;
+		for (GLint i = 0; i < MAX_ALIENS_V; i++) {
+			for (GLint j = 0; j < MAX_ALIENS_H; j++) {
+				if (alienVivo[i][j]) {
+					glLoadIdentity();
+					glTranslatef(aliens[i][j][0] + 0.001*posXAliens, aliens[i][j][1], 0.0f);
+					glScalef(0.1f, 0.1f, 0.0f);
+					if (j < 2)
+						desenhaAlien1();
+					else if (j < 4)
+						desenhaAlien2();
+					else
+						desenhaAlien3();
+				}
 			}
 		}
 	}
+
 
 	//Desenha tiros da nave
 	for(int i = 0; i < MAX_TIROS; i++) {
