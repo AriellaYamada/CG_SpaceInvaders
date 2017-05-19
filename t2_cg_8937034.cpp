@@ -251,6 +251,7 @@ void Desenha() {
 		for (GLint i = 0; i < MAX_ALIENS_V; i++) {
 			for (GLint j = 0; j < MAX_ALIENS_H; j++) {
 				if (alienVivo[i][j]) {
+					aliens[i][j][1] -= 0.0001;
 					glLoadIdentity();
 					glTranslatef(aliens[i][j][0] + 0.001*posXAliens, aliens[i][j][1], 0.0f);
 					glScalef(0.1f, 0.1f, 0.0f);
@@ -269,6 +270,7 @@ void Desenha() {
 		for (GLint i = 0; i < MAX_ALIENS_V; i++) {
 			for (GLint j = 0; j < MAX_ALIENS_H; j++) {
 				if (alienVivo[i][j]) {
+					aliens[i][j][1] -= 0.0001;
 					glLoadIdentity();
 					glTranslatef(aliens[i][j][0] + 0.001*posXAliens, aliens[i][j][1], 0.0f);
 					glScalef(0.1f, 0.1f, 0.0f);
@@ -286,6 +288,7 @@ void Desenha() {
 		for (GLint i = 0; i < MAX_ALIENS_V; i++) {
 			for (GLint j = 0; j < MAX_ALIENS_H; j++) {
 				if (alienVivo[i][j]) {
+					aliens[i][j][1] -= 0.0001;
 					glLoadIdentity();
 					glTranslatef(aliens[i][j][0] + 0.001*posXAliens, aliens[i][j][1], 0.0f);
 					glScalef(0.1f, 0.1f, 0.0f);
@@ -304,6 +307,7 @@ void Desenha() {
 		for (GLint i = 0; i < MAX_ALIENS_V; i++) {
 			for (GLint j = 0; j < MAX_ALIENS_H; j++) {
 				if (alienVivo[i][j]) {
+					aliens[i][j][1] -= 0.0001;
 					glLoadIdentity();
 					glTranslatef(aliens[i][j][0] + 0.001*posXAliens, aliens[i][j][1], 0.0f);
 					glScalef(0.1f, 0.1f, 0.0f);
