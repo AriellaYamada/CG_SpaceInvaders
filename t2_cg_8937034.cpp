@@ -1,7 +1,6 @@
 #include <GL/glut.h>
 #include <cstdlib>
 #include <ctime>
-#include <cstdio>
 
 // declara as constantes
 #define MAX_ALIENS_H 5			// numero de aliens na horizontal
@@ -184,6 +183,7 @@ void MoveAliens(int direcao) {
 	}
 }
 
+// verifica se os aliens chegaram na base
 bool AliensChegaram() {
 	for (int i = 0; i < MAX_ALIENS_V; i++) {
 		for (int j = 0; j < MAX_ALIENS_H; j++) {
@@ -546,6 +546,7 @@ void DesenhaVidas() {
 		glTranslatef((i-1)*0.2, -0.95, 0.0f);
 		glScalef(0.02, 0.02, 0.0f);
 
+		// mudar aqui 
 		glBegin(GL_QUADS);
 		glVertex2f(-1.0f, -1.0f);
 		glVertex2f(1.0f, -1.0f);
