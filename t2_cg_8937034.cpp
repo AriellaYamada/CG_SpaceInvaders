@@ -584,8 +584,70 @@ void DesenhaGameOver() {
 	// escrever na tela "Derrota - pressione 'espaço' para tentar novamente"
 }
 
+void DesenhaTraco() {
+	glBegin(GL_QUADS);
+		glVertex2f(-0.2f, 0.7);
+		glVertex2f(0.2f, 0.7f);
+		glVertex2f(0.2f, -0.7f);
+		glVertex2f(-0.2f, -0.7f);
+	glEnd();
+}
+
 void DesenhaVitoria() {
-	// escreve na tela "Parabéns! você venceu"
+
+	glColor3f(0.93f, 0.38f, 0.32f); // vermelho
+
+	//Desenha o W
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-2.0f, 0.2f, 0.0f);
+
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-1.6f, 0.2f, 0.0f);
+	glRotatef(-30.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-1.05f, 0.2f, 0.0f);
+	glRotatef(30.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-0.65f, 0.2f, 0.0f);
+	DesenhaTraco();
+
+	//Desenha o I
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(0.0f, 0.2f, 0.0f);
+	DesenhaTraco();
+
+	//Desenha o N
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(0.6f, 0.2f, 0.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(1.0f, 0.2f, 0.0f);
+	glRotatef(30.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(1.4f, 0.2f, 0.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+
 }
 
 void Desenha() {
