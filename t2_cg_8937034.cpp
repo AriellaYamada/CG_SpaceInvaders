@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 
 // declara as constantes
 #define MAX_ALIENS_H 5			// numero de aliens na horizontal
@@ -42,7 +43,7 @@ bool running = true;
 bool VerificaTiroNave(int tiro_idx) {
 	for (int i = 0; i < MAX_ALIENS_V; i++) {
 		for (int j = 0; j < MAX_ALIENS_H; j++) {
-			if (aliensAtivos[i][j] 
+			if (aliensAtivos[i][j]
 				&& posTirosNave[tiro_idx][0] >= (posAliens[i][j][0] - ALIEN_RADIUS)
 				&& posTirosNave[tiro_idx][0] <= (posAliens[i][j][0] + ALIEN_RADIUS)
 				&& posTirosNave[tiro_idx][1] >= (posAliens[i][j][1] - ALIEN_RADIUS)
@@ -106,7 +107,7 @@ bool VerificaTiroAlien(int tiro_idx) {
 		countVidas--;
 		return true;
 	}
-		
+
 	return false;
 }
 
@@ -317,7 +318,7 @@ void DesenhaNave() {
 	glVertex2f(0.1f, 1.0f);
 	glVertex2f(-0.1f, 1.0f);
 	glEnd();
-	
+
 	// haste esquerda
 	glBegin(GL_QUADS);
 	glVertex2f(-0.95f, -0.2f);
@@ -544,14 +545,37 @@ void DesenhaVidas() {
 		glColor3f(0.93f, 0.38f, 0.32f); // vermelho
 
 		glTranslatef((i-1)*0.2, -0.95, 0.0f);
-		glScalef(0.02, 0.02, 0.0f);
+		glScalef(0.04, 0.04, 0.0f);
 
-		// mudar aqui 
-		glBegin(GL_QUADS);
-		glVertex2f(-1.0f, -1.0f);
-		glVertex2f(1.0f, -1.0f);
-		glVertex2f(1.0f, 1.0f);
-		glVertex2f(-1.0f, 1.0f);
+		//Circuferencias
+		GLfloat a, b, circuf = 3.1415f, N = 100.0f, ang = 0.0f, var = circuf/N, raio = 0.4f;
+
+		//Circuferencia da esquerda
+		a = -0.4f;
+		b = 0.0f;
+		for(ang = 0.0f; ang <= circuf; ang = ang+var){
+			glBegin(GL_TRIANGLES);
+				glVertex2f(a, b);
+				glVertex2f(a + raio*cos(ang), b + raio*sin(ang));
+				glVertex2f(a + raio*cos(ang+var), b + raio*sin(ang+var));
+			glEnd();
+		}
+		//Circuferencia da esquerda
+		a = 0.4f;
+		b = 0.0f;
+		ang = 0.0f;
+		for(ang = 0.0f; ang <= circuf; ang = ang+var){
+			glBegin(GL_TRIANGLES);
+				glVertex2f(a, b);
+				glVertex2f(a + raio*cos(ang), b + raio*sin(ang));
+				glVertex2f(a + raio*cos(ang+var), b + raio*sin(ang+var));
+			glEnd();
+		}
+		//Triangulo da base
+		glBegin(GL_TRIANGLES);
+			glVertex2f(-0.8f, 0.0f);
+			glVertex2f(0.8f, 0.0f);
+			glVertex2f(0.0f, -0.8f);
 		glEnd();
 	}
 }
@@ -588,8 +612,8 @@ void Desenha() {
 		DesenhaTirosAliens();
 
 		DesenhaVidas();
-	}	
-	
+	}
+
 	//	carrega o desenho na tela
 	glFlush();
 	glutSwapBuffers();
