@@ -551,7 +551,6 @@ void DesenhaAlien2(int i, int j) {
 		glVertex2f(-0.1f, -0.8f);
 	glEnd();
 
-
 	//Bolinhas
 	glColor3f(0.05f, 0.17f, 0.32f); // azul
 
@@ -574,13 +573,55 @@ void DesenhaAlien3(int i, int j) {
 	glTranslatef(posAliens[i][j][0], posAliens[i][j][1], 0.0f);
 	glScalef(ALIEN_RADIUS, ALIEN_RADIUS, 0.0f);
 
+	//Base
+
+	GLfloat a = 0.0f, b = 0.0f, ang = 0.0f, raio = 0.65f, circuf = 2*3.1415f, N = 100.0f, var = circuf/N;
+
+	for(ang = 0; ang <= circuf; ang = ang+var) {
+		glBegin(GL_TRIANGLES);
+			glVertex2f(a, b);
+			glVertex2f(a + raio*cos(ang), b + raio*sin(ang));
+			glVertex2f(a + raio*cos(ang+var), b + raio*sin(ang+var));
+		glEnd();
+	}
+
+	//Bracos
 	glBegin(GL_QUADS);
-	glVertex2f(-1.0f, -1.0f);
-	glVertex2f(1.0f, -1.0f);
-	glVertex2f(1.0f, 1.0f);
-	glVertex2f(-1.0f, 1.0f);
+		glVertex2f(-0.65f, 0.1f);
+		glVertex2f(-0.65f, -0.1f);
+		glVertex2f(-1.0f, -0.1f);
+		glVertex2f(-1.0f, 0.1f);
 	glEnd();
+
+	glBegin(GL_QUADS);
+		glVertex2f(0.65f, 0.1f);
+		glVertex2f(0.65f, -0.1f);
+		glVertex2f(1.0f, -0.1f);
+		glVertex2f(1.0f, 0.1f);
+	glEnd();
+
+	//Canhao
+	glBegin(GL_QUADS);
+		glVertex2f(-0.1f, -0.65f);
+		glVertex2f(0.1f, -0.65f);
+		glVertex2f(0.1f, -1.0f);
+		glVertex2f(-0.1f, -1.0f);
+	glEnd();
+
+	//Olho
+	glColor3f(0.05f, 0.17f, 0.32f); // azul
+
+	raio = 0.2f;
+
+	for(ang = 0; ang <= circuf; ang = ang+var) {
+		glBegin(GL_TRIANGLES);
+			glVertex2f(a, b);
+			glVertex2f(a + raio*cos(ang), b + raio*sin(ang));
+			glVertex2f(a + raio*cos(ang+var), b + raio*sin(ang+var));
+		glEnd();
+	}
 }
+
 
 void DesenhaAliens() {
 	for (int i = 0; i < MAX_ALIENS_V; i++) {
