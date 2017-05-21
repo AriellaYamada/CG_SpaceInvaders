@@ -497,7 +497,7 @@ void DesenhaAlien1(int i, int j) {
 
 	circuf = 2*3.1415f;
 	raio = 0.1;
-	b = 0.2;	
+	b = 0.2;
 
 	for(a = -0.55f; a < 0.75f; a = a+0.5) {
 		for(ang = 0; ang <= circuf; ang = ang+var) {
@@ -628,10 +628,6 @@ void DesenhaVidas() {
 	}
 }
 
-void DesenhaGameOver() {
-	// escrever na tela "Derrota - pressione 'espaço' para tentar novamente"
-}
-
 void DesenhaTraco() {
 	glBegin(GL_QUADS);
 		glVertex2f(-0.2f, 0.7);
@@ -641,6 +637,198 @@ void DesenhaTraco() {
 	glEnd();
 }
 
+void DesenhaTraco2() {
+	glBegin(GL_QUADS);
+		glVertex2f(-0.6f, -0.6f);
+		glVertex2f(-0.4f, -0.6f);
+		glVertex2f(0.0f, 0.2f);
+		glVertex2f(0.0f, 0.6f);
+	glEnd();
+}
+
+void DesenhaGameOver() {
+	// escrever na tela "Derrota - pressione 'espaço' para tentar novamente"
+	glColor3f(0.93f, 0.38f, 0.32f); // vermelho
+	//Desenha o G
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-3.0f, 2.0f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-3.5f, 1.5f, 0.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-3.0f, 1.0f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.1f, 0.0f);
+	glTranslatef(-2.5f, 2.5f, 0.0f);
+	DesenhaTraco();
+
+	//Desenha A
+	glLoadIdentity();
+	glScalef(0.2f, 0.22f, 0.0f);
+	glTranslatef(-1.5f, 1.3f, 0.0f);
+	glRotatef(-30.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.22f, 0.0f);
+	glTranslatef(-0.9f, 1.3f, 0.0f);
+	glRotatef(30.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.1f, 0.2f, 0.0f);
+	glTranslatef(-2.4f, 1.1f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	//Desenha M
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(0.0f, 1.5f, 0.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(0.4f, 1.5f, 0.0f);
+	glRotatef(30.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(1.0f, 1.5f, 0.0f);
+	glRotatef(-30.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(1.4f, 1.5f, 0.0f);
+	DesenhaTraco();
+
+	//Desenha E
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(2.0f, 1.5f, 0.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(2.5f, 2.0f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(2.5f, 1.5f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(2.5f, 1.0f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	//Desenha O
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-2.5f, -0.5f, 0.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-2.0f, 0.0f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-2.0f, -1.0f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-1.5f, -0.5f, 0.0f);
+	DesenhaTraco();
+
+	//Desenha V
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(-0.6f, -0.5f, 0.0f);
+	glRotatef(30.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(0.0f, -0.5f, 0.0f);
+	glRotatef(-30.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	//Desenha E
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(1.0f, -0.5f, 0.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(1.5f, -1.0f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(1.5f,-0.5f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(1.5f, 0.0f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	//Desenha R
+	glLoadIdentity();
+	glScalef(0.2f, 0.2f, 0.0f);
+	glTranslatef(2.6f, -0.5f, 0.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.1f, 0.2f, 0.0f);
+	glTranslatef(6.0f, 0.0f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.1f, 0.0f);
+	glTranslatef(3.2f, -0.3f, 0.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.1f, 0.2f, 0.0f);
+	glTranslatef(6.1f, -0.5f, 0.0f);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+	glLoadIdentity();
+	glScalef(0.2f, 0.1f, 0.0f);
+	glTranslatef(3.0f, -1.7f, 0.0f);
+	glRotatef(20.0f, 0.0f, 0.0f, 1.0f);
+	DesenhaTraco();
+
+}
+
 void DesenhaVitoria() {
 
 	glColor3f(0.93f, 0.38f, 0.32f); // vermelho
@@ -648,50 +836,50 @@ void DesenhaVitoria() {
 	//Desenha o W
 	glLoadIdentity();
 	glScalef(0.2f, 0.2f, 0.0f);
-	glTranslatef(-2.0f, 0.2f, 0.0f);
+	glTranslatef(-1.7f, 0.2f, 0.0f);
 
 	DesenhaTraco();
 
 	glLoadIdentity();
 	glScalef(0.2f, 0.2f, 0.0f);
-	glTranslatef(-1.6f, 0.2f, 0.0f);
+	glTranslatef(-1.3f, 0.2f, 0.0f);
 	glRotatef(-30.0f, 0.0f, 0.0f, 1.0f);
 	DesenhaTraco();
 
 	glLoadIdentity();
 	glScalef(0.2f, 0.2f, 0.0f);
-	glTranslatef(-1.05f, 0.2f, 0.0f);
+	glTranslatef(-0.75f, 0.2f, 0.0f);
 	glRotatef(30.0f, 0.0f, 0.0f, 1.0f);
 	DesenhaTraco();
 
 	glLoadIdentity();
 	glScalef(0.2f, 0.2f, 0.0f);
-	glTranslatef(-0.65f, 0.2f, 0.0f);
+	glTranslatef(-0.35f, 0.2f, 0.0f);
 	DesenhaTraco();
 
 	//Desenha o I
 
 	glLoadIdentity();
 	glScalef(0.2f, 0.2f, 0.0f);
-	glTranslatef(0.0f, 0.2f, 0.0f);
+	glTranslatef(0.3f, 0.2f, 0.0f);
 	DesenhaTraco();
 
 	//Desenha o N
 
 	glLoadIdentity();
 	glScalef(0.2f, 0.2f, 0.0f);
-	glTranslatef(0.6f, 0.2f, 0.0f);
+	glTranslatef(0.9f, 0.2f, 0.0f);
 	DesenhaTraco();
 
 	glLoadIdentity();
 	glScalef(0.2f, 0.2f, 0.0f);
-	glTranslatef(1.0f, 0.2f, 0.0f);
+	glTranslatef(1.3f, 0.2f, 0.0f);
 	glRotatef(30.0f, 0.0f, 0.0f, 1.0f);
 	DesenhaTraco();
 
 	glLoadIdentity();
 	glScalef(0.2f, 0.2f, 0.0f);
-	glTranslatef(1.4f, 0.2f, 0.0f);
+	glTranslatef(1.7f, 0.2f, 0.0f);
 	DesenhaTraco();
 
 	glLoadIdentity();
