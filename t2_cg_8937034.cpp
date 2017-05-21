@@ -520,12 +520,52 @@ void DesenhaAlien2(int i, int j) {
 	glTranslatef(posAliens[i][j][0], posAliens[i][j][1], 0.0f);
 	glScalef(ALIEN_RADIUS, ALIEN_RADIUS, 0.0f);
 
+	//Base
 	glBegin(GL_QUADS);
-	glVertex2f(-1.0f, -1.0f);
-	glVertex2f(1.0f, -1.0f);
-	glVertex2f(1.0f, 1.0f);
-	glVertex2f(-1.0f, 1.0f);
+		glVertex2f(-0.6f, 0.4f);
+		glVertex2f(0.6f, 0.4f);
+		glVertex2f(0.6f, -0.4f);
+		glVertex2f(-0.6f, -0.4f);
 	glEnd();
+
+	//Bracos
+	glBegin(GL_QUADS);
+		glVertex2f(-0.6f, 0.1f);
+		glVertex2f(-0.6f, -0.1f);
+		glVertex2f(-1.0f, -0.1f);
+		glVertex2f(-1.0f, 0.1f);
+	glEnd();
+
+	glBegin(GL_QUADS);
+		glVertex2f(0.6f, 0.1f);
+		glVertex2f(0.6f, -0.1f);
+		glVertex2f(1.0f, -0.1f);
+		glVertex2f(1.0f, 0.1f);
+	glEnd();
+
+	//Canhao
+	glBegin(GL_QUADS);
+		glVertex2f(-0.1f, -0.4f);
+		glVertex2f(0.1f, -0.4f);
+		glVertex2f(0.1f, -0.8f);
+		glVertex2f(-0.1f, -0.8f);
+	glEnd();
+
+
+	//Bolinhas
+	glColor3f(0.05f, 0.17f, 0.32f); // azul
+
+	GLfloat a = 0.0f, b = 0.0f, ang = 0.0f, raio = 0.08f, circuf = 2*3.1415f, N = 100.0f, var = circuf/N;
+
+	for(a = -0.4f; a < 0.75f; a = a+0.4) {
+		for(ang = 0; ang <= circuf; ang = ang+var) {
+			glBegin(GL_TRIANGLES);
+				glVertex2f(a, b);
+				glVertex2f(a + raio*cos(ang), b + raio*sin(ang));
+				glVertex2f(a + raio*cos(ang+var), b + raio*sin(ang+var));
+			glEnd();
+		}
+	}
 }
 
 void DesenhaAlien3(int i, int j) {
